@@ -121,7 +121,7 @@ class Object(object):
                                                 data, data_type))
             else:
                 if v != k:
-                    self._attributes.setdefault(k, v)
+                    self._attributes.setdefault(k, self._raw_attributes.get(k, v))
                 else:
                     self._attributes.setdefault(k, None)
 
