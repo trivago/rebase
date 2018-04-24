@@ -7,7 +7,7 @@ class Validator(Object):
         self.errors = []
 
     def properties(self):
-        return {'errors': 'errors'}
+        return {'errors': 'errors', 'required': False}
 
     def validate(self, value):
         is_valid = True

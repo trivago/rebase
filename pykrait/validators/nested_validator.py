@@ -1,7 +1,13 @@
-from pykrait.core import Validator, Model
+from pykrait.core import Model, Validator
 
 
 class NestedValidator(Validator):
+    def properties(self):
+        return {
+            **super().properties(),
+            'required': True,
+        }
+
     def validate(self, value):
         if not super().validate(value):
             return False

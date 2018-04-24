@@ -23,8 +23,10 @@ class Model(Object):
 
         for attr, ruleset in self.rules().items():
             for rule in ruleset:
-                is_valid &= rule.validate(getattr(self, attr, None))
-                self.add_errors(attr, rule.errors)
+                value = getattr(self, attr, None)
+                if rule.required or value is not None:
+                    is_valid &= rule.validate(value)
+                    self.add_errors(attr, rule.errors)
 
         return is_valid
 

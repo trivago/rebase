@@ -24,4 +24,4 @@ class RangeValidator(Validator):
         return is_valid
 
     def depends_on(self):
-        return {IntegerValidator()}
+        return {IntegerValidator(required=self.required)}
