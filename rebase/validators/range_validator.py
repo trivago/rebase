@@ -1,5 +1,5 @@
-from pykrait.core import Validator
-from pykrait.validators import IntegerValidator
+from rebase.core import Validator
+from rebase.validators import IntegerValidator
 
 
 class RangeValidator(Validator):

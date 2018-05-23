@@ -1,7 +1,7 @@
 from typing import Any, Dict, List
 
 import simplejson as json
-from pykrait.core import Object, Validator
+from rebase.core import Object, Validator
 
 
 class Model(Object):

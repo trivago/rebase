@@ -1,11 +1,11 @@
-from pykrait.core import Validator
+from rebase.core import Validator
 
 
-class BoolValidator(Validator):
+class IntegerValidator(Validator):
     def properties(self):
         return {
             **super().properties(),
-            'message': '`{}` is not a boolean'
+            'message': '`{}` is not an integer'
         }
 
     def validate(self, value):
@@ -14,7 +14,7 @@ class BoolValidator(Validator):
 
         is_valid = True
 
-        if type(value) is not bool:
+        if type(value) is not int:
             self.errors.append(self.message.format(str(value)))
             is_valid &= False
 

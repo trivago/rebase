@@ -1,4 +1,4 @@
-from pykrait.core import Object
+from rebase.core import Object
 
 
 class Validator(Object):

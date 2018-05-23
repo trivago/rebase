@@ -1,4 +1,4 @@
-from pykrait.core import Model, Validator
+from rebase.core import Model, Validator
 
 
 class NestedValidator(Validator):

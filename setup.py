@@ -8,7 +8,7 @@ class Pytest(TestCommand):
     def initialize_options(self):
         TestCommand.initialize_options(self)
         self.pytest_args = [
-            '--cov=pykrait', '--cov-report', 'term-missing', '--fulltrace',
+            '--cov=rebase', '--cov-report', 'term-missing', '--fulltrace',
             '-vv', '-s'
         ]
 
@@ -20,7 +20,7 @@ class Pytest(TestCommand):
 
 
 setup(
-    name='pykrait',
+    name='rebase',
     python_requires='>=3.6',
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
