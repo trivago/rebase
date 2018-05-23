@@ -15,5 +15,3 @@ class TestObject(unittest.TestCase):
         self.assertEqual(obj.gender, 'Male')
 
         self.assertDictEqual(obj.attributes, obj.get('name', 'age', 'gender'))
-
-        print(obj)
