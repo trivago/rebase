@@ -10,14 +10,14 @@ class Model(Object):
         self._context = context
         super().__init__(**attributes)
 
-    def __str__(self) -> str:
-        return json.dumps({
-            **self.attributes,
+    def _debug(self) -> Dict[str, Any]:
+        return {
+            **super()._debug(),
             **{
                 '_errors': self._errors,
                 '_context': self._context
             }
-        })
+        }
 
     def _properties(self) -> List[str]:
         return [*super()._properties(), '_errors', '_context']
@@ -60,3 +60,6 @@ class Model(Object):
 
     def get_context(self):
         return self._context
+
+    def set_context(self, value):
+        self._context = value

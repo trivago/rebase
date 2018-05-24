@@ -3,15 +3,46 @@ from unittest import mock
 from rebase.core import Object
 
 class TestObject(unittest.TestCase):
+    def setUp(self):
+        self.obj = Object(
+            name='Paul',
+            age='35',
+            gender="Male",
+            location=dict(
+                city='Paris',
+                country='France'
+            ),
+            is_admin=False,
+        )
+
     def test_object_basic(self):
-        obj = Object(name='Paul', age=35, gender="Male")
+        self.assertIn('name', self.obj.attributes)
+        self.assertIn('age', self.obj.attributes)
+        self.assertIn('gender', self.obj.attributes)
 
-        self.assertIn('name', obj.attributes)
-        self.assertIn('age', obj.attributes)
-        self.assertIn('gender', obj.attributes)
+        self.assertEqual(self.obj.name, 'Paul')
+        self.assertEqual(self.obj.age, '35')
+        self.assertEqual(self.obj.gender, 'Male')
 
-        self.assertEqual(obj.name, 'Paul')
-        self.assertEqual(obj.age, 35)
-        self.assertEqual(obj.gender, 'Male')
+        self.assertDictEqual(self.obj.attributes, self.obj.get('name', 'age', 'gender', 'location', 'is_admin'))
 
-        self.assertDictEqual(obj.attributes, obj.get('name', 'age', 'gender'))
+    @mock.patch.multiple(
+        Object,
+        properties=mock.Mock(
+            return_value={
+                'firstname': 'name',
+                'age': ('age', int),
+                'gender': ('gender', lambda x: int(x=='Male')),
+                'city': 'location.city',
+                'country': ('location.country', lambda x: x.upper()),
+            }
+        )
+    )
+    def test_object_init(self):
+        self.setUp()
+
+        self.assertEqual(self.obj.firstname, 'Paul')
+        self.assertEqual(self.obj.age, 35)
+        self.assertEqual(self.obj.gender, 1)
+        self.assertEqual(self.obj.city, 'Paris')
+        self.assertEqual(self.obj.country, 'FRANCE')

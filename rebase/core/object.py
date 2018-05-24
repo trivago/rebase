@@ -89,10 +89,7 @@ class Object(object):
         Returns: a string representation of the object in json format.
 
         """
-        return json.dumps({
-            '_id': self.get_id(),
-            'attributes': self.attributes
-        }, use_decimal=True)
+        return json.dumps(self._debug(), use_decimal=True)
 
     def __repr__(self) -> str:
         """Return the representation of the object at creation.
@@ -105,6 +102,12 @@ class Object(object):
             classname=self.classname(),
             args=self._raw_attributes
         )
+
+    def _debug(self) -> Dict[str, Any]:
+        return {
+            '_id': self.get_id(),
+            'attributes': self.attributes
+        }
 
     def _enforce_data_type(self, data: Any, data_type: type) -> Any:
         try:
@@ -124,7 +127,7 @@ class Object(object):
 
         """
         for k, v in self.properties().items():
-            if isinstance(v, str) and v in self._raw_attributes:
+            if isinstance(v, str):
                 self._attributes.setdefault(
                     k, self._get_attr_recurse(v, self._raw_attributes))
             elif callable(v):
@@ -132,14 +135,14 @@ class Object(object):
             elif isinstance(v, tuple):
                 attribute, data_type = v
                 data = attribute
-                if isinstance(attribute, str) and attribute in self._raw_attributes:
+                if isinstance(attribute, str) and attribute:
                     data = self._get_attr_recurse(
                         attribute, self._raw_attributes)
                 elif callable(attribute):
                     data = attribute()
 
                 self._attributes.setdefault(k,
-                                            self.enforce_data_type(
+                                            self._enforce_data_type(
                                                 data, data_type))
             else:
                 if v != k:
@@ -148,21 +151,21 @@ class Object(object):
                 else:
                     self._attributes.setdefault(k, None)
 
-    def _get_attr_recurse(self, attr, obj):
+    def _get_attr_recurse(self, attr, obj, idx=0):
         if isinstance(obj, Object):
             return self._get_attr_recurse(attr, obj.attributes)
         elif obj is None:
             return None
 
         attr_list = attr.split('.')
-        key = attr_list.pop(0)
+        key = attr_list.pop(idx)
         if key not in obj:
-            return None
+            return attr
 
-        if len(attr_list) == 0:
+        if len(attr_list) == idx:
             return obj.get(key)
         else:
-            return self._get_attr_recurse('.'.join(attr_list), obj.get(key))
+            return self._get_attr_recurse(attr, obj.get(key), idx+1)
 
     def _properties(self) -> List[str]:
         return ['_id', '_attributes', '_raw_attributes']
