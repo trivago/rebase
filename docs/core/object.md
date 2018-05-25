@@ -19,11 +19,11 @@ from rebase.core import Object
 
 obj = Object(name='Paul', age=35, location='France')
 
-print(object.name) # Paul
-print(object.age) # 35
-print(object.location) # France
-print(object.attributes) # {'name': 'Paul', 'age': 35, 'location': 'France'}
-print(object.get('name', 'age')) # {'name': 'Paul', 'age': 35}
+print(obj.name) # Paul
+print(obj.age) # 35
+print(obj.location) # France
+print(obj.attributes) # {'name': 'Paul', 'age': 35, 'location': 'France'}
+print(obj.get('name', 'age')) # {'name': 'Paul', 'age': 35}
 ```
 
 ### Extending and customizing an object
