@@ -1,1 +1,1 @@
-# `rebase.core.Validator`
+# [`rebase.core.Validator`](/rebase/core/validator.py)

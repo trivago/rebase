@@ -1,4 +1,4 @@
-# `rebase.core.Object`
+# [`rebase.core.Object`](/rebase/core/object.py)
 
 The `rebase.core.Object` is an improved version of the base python `object`. It offers several generic functions that you can use to build your objects. It is the core of rebase and all the rebase components are built on it.
 
