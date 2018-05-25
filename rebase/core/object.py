@@ -50,7 +50,7 @@ class Object(object):
             return super().__getattr__(attr_name)
         elif attr_name not in self.properties():
             raise AttributeError(
-                f'Getting unknown property: `{self.classname()}.{attr_name}`.')
+                f'Getting unknown property: `{self.classname}.{attr_name}`.')
         return self._attributes.get(attr_name)
 
     def __setattr__(self, attr_name: str, value: Any):
@@ -72,14 +72,14 @@ class Object(object):
             super().__setattr__(attr_name, value)
         elif attr_name not in self.properties():
             raise AttributeError(
-                f'Setting unknown property: `{self.classname()}.{attr_name}`.')
+                f'Setting unknown property: `{self.classname}.{attr_name}`.')
         else:
             attr = self.properties().get(attr_name)
             if isinstance(attr, tuple) and value is not None:
                 k, v = attr
                 if type(value) != v:
                     raise AttributeError(
-                        f'`Value for {self.classname()}.{attr_name}` should be of type {v}; {type(value)} provided.')
+                        f'`Value for {self.classname}.{attr_name}` should be of type {v}; {type(value)} provided.')
 
             self._attributes.update({attr_name: value})
 
@@ -99,7 +99,7 @@ class Object(object):
 
         """
         return '{classname}(**{args})'.format(
-            classname=self.classname(),
+            classname=self.classname,
             args=self._raw_attributes
         )
 
@@ -179,6 +179,7 @@ class Object(object):
         """
         return self.get(*self.properties())
 
+    @property
     def classname(self) -> str:
         """Return the qualified name of this class.
 
