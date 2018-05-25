@@ -1,4 +1,4 @@
-# rebase
+# rebase [![Build Status](https://travis-ci.org/trivago/rebase.svg?branch=master)](https://travis-ci.org/trivago/rebase)
 
 
 ## What is it?
