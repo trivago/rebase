@@ -15,11 +15,11 @@ Working daily with data having different structures becomes a pain eventually. S
 ## Documentation
 
 ### core
- - [rebase.core.Object](/core/object.md)
- - [rebase.core.Model](/core/model.md)
- - [rebase.core.Validator](/core/validator.md)
+ - [rebase.core.Object](docs/core/object.md)
+ - [rebase.core.Model](docs/core/model.md)
+ - [rebase.core.Validator](docs/core/validator.md)
 ### validators
- - [rebase.validators.BoolValidator](/validators/bool_validator.md)
- - [rebase.validators.IntegerValidator](/validators/integer_validator.md)
- - [rebase.validators.NestedValidator](/validators/nested_validator.md)
- - [rebase.validators.RangeValidator](/validators/range_validator.md) 
+ - [rebase.validators.BoolValidator](docs/validators/bool_validator.md)
+ - [rebase.validators.IntegerValidator](docs/validators/integer_validator.md)
+ - [rebase.validators.NestedValidator](docs/validators/nested_validator.md)
+ - [rebase.validators.RangeValidator](docs/validators/range_validator.md)
