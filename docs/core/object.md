@@ -4,7 +4,7 @@ The `rebase.core.Object` is an improved version of the base python `object`. It 
 
 It offers the ability to declare public and private properties as well as introducing basic types on the properties. However the way to declare arguments within a class is different from what you normally do in python.
 
-Dependinf on the arguments that you pass to the constructor, properties will be created dynamically.
+Depending on the arguments that you pass to the constructor, properties will be created dynamically.
 
 
 ## Documentation
