@@ -4,10 +4,13 @@ from rebase.core import Object
 class Validator(Object):
     def __init__(self, **attributes):
         super().__init__(**attributes)
-        self.errors = []
 
     def properties(self):
-        return {'errors': 'errors', 'required': False}
+        return {
+            'errors': [],
+            'required': False,
+            'message': f'{{value}} failed to comply with {self.classname} rules.'
+        }
 
     def validate(self, value):
         is_valid = True

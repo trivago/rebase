@@ -5,9 +5,10 @@ from rebase.validators import IntegerValidator
 class RangeValidator(Validator):
     def properties(self):
         return {
-            **super().properties(), 'min': 'min',
+            **super().properties(),
+            'min': 'min',
             'max': 'max',
-            'message': '{} is not within the range {} and {}'
+            'message': '{value} is not within the range {min} and {max}'
         }
 
     def validate(self, value):
@@ -18,7 +19,12 @@ class RangeValidator(Validator):
 
         if not (int(value) >= self.min and int(value) <= self.max):
             self.errors.append(
-                self.message.format(str(value), str(self.min), str(self.max)))
+                self.message.format(
+                    value=str(value),
+                    min=str(self.min),
+                    max=str(self.max)
+                )
+            )
             is_valid &= False
 
         return is_valid

@@ -5,7 +5,7 @@ class IntegerValidator(Validator):
     def properties(self):
         return {
             **super().properties(),
-            'message': '`{}` is not an integer'
+            'message': '`{value}` is not an integer'
         }
 
     def validate(self, value):
@@ -15,7 +15,7 @@ class IntegerValidator(Validator):
         is_valid = True
 
         if type(value) is not int:
-            self.errors.append(self.message.format(str(value)))
+            self.errors.append(self.message.format(value=value))
             is_valid &= False
 
         return is_valid
