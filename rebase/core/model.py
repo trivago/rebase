@@ -1,6 +1,14 @@
-from typing import Any, Dict, List
+"""This file is part of the trivago/rebase library.
 
-import simplejson as json
+# Copyright (c) 2018 trivago N.V.
+# License: Apache 2.0
+# Source: https://github.com/trivago/rebase
+# Version: alpha-1.0
+# Python Version: 3.6
+# Author: Yuv Joodhisty <yuvrajsingh.joodhisty@trivago.com>
+"""
+
+from typing import Any, Dict, List
 from rebase.core import Object, Validator
 
 

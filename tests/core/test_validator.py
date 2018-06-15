@@ -1,3 +1,13 @@
+"""This file is part of the trivago/rebase library.
+
+# Copyright (c) 2018 trivago N.V.
+# License: Apache 2.0
+# Source: https://github.com/trivago/rebase
+# Version: alpha-1.0
+# Python Version: 3.6
+# Author: Yuv Joodhisty <yuvrajsingh.joodhisty@trivago.com>
+"""
+
 import unittest
 from unittest import mock
 from rebase.core import Validator
@@ -18,7 +28,7 @@ from rebase.core import Validator
         }
     )
 )
-class TestObject(unittest.TestCase):
+class TestValidator(unittest.TestCase):
     def test_validator_basic(self):
         v = Validator()
 

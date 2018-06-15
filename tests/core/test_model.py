@@ -1,7 +1,18 @@
+"""This file is part of the trivago/rebase library.
+
+# Copyright (c) 2018 trivago N.V.
+# License: Apache 2.0
+# Source: https://github.com/trivago/rebase
+# Version: alpha-1.0
+# Python Version: 3.6
+# Author: Yuv Joodhisty <yuvrajsingh.joodhisty@trivago.com>
+"""
+
 import unittest
 from unittest import mock
 from rebase.core import Model
 from rebase.validators import RangeValidator
+
 
 @mock.patch.multiple(
     Model,
@@ -19,7 +30,7 @@ from rebase.validators import RangeValidator
         return_value={
             'name': 'name',
             'age': 'age',
-            'gender': ('gender', lambda x: int(x=='Male')),
+            'gender': ('gender', lambda x: int(x == 'Male')),
             'location': ('location', lambda x: x.upper()),
         }
     )
@@ -52,7 +63,9 @@ class TestModel(unittest.TestCase):
         self.assertIn('location', self.model.attributes)
 
         self.model.set_context('undefined_scenario')
-        self.assertEqual(self.model.attributes, self.model.get('name', 'age', 'gender', 'location'))
+        self.assertEqual(self.model.attributes, self.model.get(
+            'name', 'age', 'gender', 'location'))
 
         self.model.set_context('personal')
-        self.assertNotEqual(self.model.attributes, self.model.get('name', 'age', 'gender', 'location'))
+        self.assertNotEqual(self.model.attributes, self.model.get(
+            'name', 'age', 'gender', 'location'))
