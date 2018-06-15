@@ -14,6 +14,14 @@ from rebase.validators import RangeValidator
         return_value={
             'age': [RangeValidator(min=20, max=30)]
         }
+    ),
+    properties=mock.Mock(
+        return_value={
+            'name': 'name',
+            'age': 'age',
+            'gender': ('gender', lambda x: int(x=='Male')),
+            'location': ('location', lambda x: x.upper()),
+        }
     )
 )
 class TestModel(unittest.TestCase):
