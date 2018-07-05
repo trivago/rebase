@@ -24,6 +24,7 @@ class Validator(Object):
 
     def validate(self, value):
         is_valid = True
+        self.errors.clear()
 
         for validator in self.depends_on():
             is_valid &= validator.validate(value)

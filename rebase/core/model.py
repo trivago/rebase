@@ -47,6 +47,7 @@ class Model(Object):
 
     def validate(self) -> bool:
         is_valid = True
+        self._errors.clear()
 
         for attr, ruleset in self.rules().items():
             if attr not in self.attributes:
