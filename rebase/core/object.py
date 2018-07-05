@@ -15,6 +15,14 @@ import simplejson as json
 
 
 class Object(object):
+    def __dir__(self):
+        """Return a list of attributes for the class.
+
+        Returns: a list of attributes for the class.
+
+        """
+        return [*self._attributes.keys(), *['attributes', 'classname']]
+
     def __init__(self, **kwargs):
         """Initialize the object with the given attributes.
 
