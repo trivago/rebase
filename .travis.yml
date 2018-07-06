@@ -5,3 +5,11 @@ install:
 - python setup.py install
 script:
 - python setup.py test
+deploy:
+  provider: pypi
+  user: locustv2
+  password:
+    secure: uhbo0gd98ymFhE+gu8H3JIaL4HMWkoXhQojaMncckTva219rPSivuwgVXr/4r+kxbocMjvBvlhRPtkN3ufOL+D8r04it+RYEYGpvjelZTMJ/0J0KLRG6hrd9QIBZ/ahVWyQP7GXxYZetNIW95D763bRUpbd7x0aBPDSNwLJ8H12WUmX7FKd1nQouP7ymtb+AH/Z9PdXD8xfKYLz9OEgwjq+w15Fkj8+OkOUVIKpktVuJENG6QrH1VwZudEBtGxDk890WECpaif1Z5jIxqTp+P3HqzYP0ZDrgT92DnVAUYmBJBNrSTHogGH3JXw4XAnl+4Dsd6D0K/owPwilouSXLHsWfeYf/YAdHe14bxqMhW2cATS1l5wHYng1d4C7tdwxC0mgtCWP2OImthgZ6bRlHm9sNBccT23WJtP4uGxnNdqnkH004WhYrhOw3AxwxbeQ2+XwPWKwM/JpIEEzzUp1r2S03cqHZ5LIJtG23rFbB7hJRF9F1jQn2I+h0/BOOcEoW5TyqRCofO0D5qafi9aAKnhglZX5Vs0KbFeAuLG4nyca/+qssAZK6RcoMTaBYsyDc/9SF4ucoo/eC/lpftRKqVt7nBA1347D2pVn2TTZE9kh8q7zOHbxJnp9j8TutZJd1DrxubD6cgHPZY/UC+OT6LjKVoeAlHENd/JbOFsapVzE=
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
