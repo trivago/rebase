@@ -12,6 +12,12 @@ Working daily with data having different structures becomes a pain eventually. S
 
 ## Getting Started
 
+### Installation
+Install via [pip](http://www.pip-installer.org/)
+```bash
+$ pip install rebase
+```
+
 ## Documentation
 
 ### core
