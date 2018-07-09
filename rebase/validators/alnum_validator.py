@@ -3,13 +3,13 @@
 # Copyright (c) 2018 trivago N.V.
 # License: Apache 2.0
 # Source: https://github.com/trivago/rebase
-# Version: 0.2a1
+# Version: 0.2a2
 # Python Version: 3.6
 # Author: Yuv Joodhisty <yuvrajsingh.joodhisty@trivago.com>
 """
 
 from rebase.core import Validator
-from base.validators import StringValidator
+from rebase.validators import StringValidator
 
 
 class AlnumValidator(Validator):
