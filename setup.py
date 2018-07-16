@@ -21,7 +21,7 @@ class Pytest(TestCommand):
 
 setup(
     name='rebase',
-    version='0.2a2',
+    version='1.0.2',
     python_requires='>=3.6',
     author="Yuv Joodhisty",
     author_email="locustv2@gmail.com",
