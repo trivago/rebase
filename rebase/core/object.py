@@ -3,7 +3,7 @@
 # Copyright (c) 2018 trivago N.V.
 # License: Apache 2.0
 # Source: https://github.com/trivago/rebase
-# Version: 1.0.2
+# Version: 0.2a2
 # Python Version: 3.6
 # Author: Yuv Joodhisty <yuvrajsingh.joodhisty@trivago.com>
 """
@@ -146,8 +146,9 @@ class Object(object):
         """
         for k, v in self.properties().items():
             if isinstance(v, str):
-                self._attributes.setdefault(
-                    k, self._get_attr_recurse(v, self._raw_attributes))
+                data = self._get_attr_recurse(v, self._raw_attributes)
+                if k != data:
+                    self._attributes.setdefault(k, data)
             elif callable(v):
                 self._attributes.setdefault(k, v())
             elif isinstance(v, tuple):
@@ -163,11 +164,8 @@ class Object(object):
                                             self._enforce_data_type(
                                                 data, data_type))
             else:
-                if v != k:
-                    self._attributes.setdefault(
-                        k, self._raw_attributes.get(k, v))
-                else:
-                    self._attributes.setdefault(k, None)
+                self._attributes.setdefault(
+                    k, self._raw_attributes.get(k, v))
 
     def _get_attr_recurse(self, attr, obj, idx=0):
         if isinstance(obj, Object):
