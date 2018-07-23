@@ -30,6 +30,7 @@ setup(
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
     long_description=open('README.md').read(),
+    long_description_content_type="text/markdown",
     use_scm_version=True,
     setup_requires=['setuptools_scm'],
     install_requires=[
