@@ -157,6 +157,7 @@ class Object(object):
                 if isinstance(attribute, str) and attribute:
                     data = self._get_attr_recurse(
                         attribute, self._raw_attributes)
+                    data = data if data != attribute else None
                 elif callable(attribute):
                     data = attribute()
 

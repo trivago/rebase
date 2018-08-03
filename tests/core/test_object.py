@@ -47,6 +47,7 @@ class TestObject(unittest.TestCase):
                 'gender': ('gender', lambda x: int(x == 'Male')),
                 'city': 'location.city',
                 'country': ('location.country', lambda x: x.upper()),
+                'occupation': ('occupation', lambda x: x)
             }
         )
     )
@@ -58,3 +59,4 @@ class TestObject(unittest.TestCase):
         self.assertEqual(self.obj.gender, 1)
         self.assertEqual(self.obj.city, 'Paris')
         self.assertEqual(self.obj.country, 'FRANCE')
+        self.assertEqual(self.obj.occupation, None)
