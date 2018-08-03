@@ -145,19 +145,19 @@ class Object(object):
 
         """
         for k, v in self.properties().items():
-            if isinstance(v, str):
-                data = self._get_attr_recurse(v, self._raw_attributes)
-                if k != data:
-                    self._attributes.setdefault(k, data)
+            if k in self._raw_attributes and not isinstance(v, tuple):
+                self._attributes.setdefault(k, self._raw_attributes.get(k))
+            elif isinstance(v, str):
+                self._attributes.setdefault(
+                    k, self._get_attr_recurse(v, self._raw_attributes))
             elif callable(v):
                 self._attributes.setdefault(k, v())
             elif isinstance(v, tuple):
                 attribute, data_type = v
-                data = attribute
-                if isinstance(attribute, str) and attribute:
+                data = None
+                if attribute and isinstance(attribute, str):
                     data = self._get_attr_recurse(
                         attribute, self._raw_attributes)
-                    data = data if data != attribute else None
                 elif callable(attribute):
                     data = attribute()
 
@@ -177,7 +177,7 @@ class Object(object):
         attr_list = attr.split('.')
         key = attr_list.pop(idx)
         if key not in obj:
-            return attr
+            return None
 
         if len(attr_list) == idx:
             return obj.get(key)
