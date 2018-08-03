@@ -24,6 +24,8 @@ class TestObject(unittest.TestCase):
                 country='France'
             ),
             is_admin=False,
+            user='user',
+            status='inactive'
         )
 
     def test_object_basic(self):
@@ -36,7 +38,7 @@ class TestObject(unittest.TestCase):
         self.assertEqual(self.obj.gender, 'Male')
 
         self.assertDictEqual(self.obj.attributes, self.obj.get(
-            'name', 'age', 'gender', 'location', 'is_admin'))
+            'name', 'age', 'gender', 'location', 'is_admin', 'user', 'status'))
 
     @mock.patch.multiple(
         Object,
@@ -47,7 +49,10 @@ class TestObject(unittest.TestCase):
                 'gender': ('gender', lambda x: int(x == 'Male')),
                 'city': 'location.city',
                 'country': ('location.country', lambda x: x.upper()),
-                'occupation': ('occupation', lambda x: x)
+                'occupation': ('occupation', lambda x: x),
+                'user': ('user', lambda x: x),
+                'admin': 'not admin',
+                'status': lambda: 'active'
             }
         )
     )
@@ -60,3 +65,6 @@ class TestObject(unittest.TestCase):
         self.assertEqual(self.obj.city, 'Paris')
         self.assertEqual(self.obj.country, 'FRANCE')
         self.assertEqual(self.obj.occupation, None)
+        self.assertEqual(self.obj.user, 'user')
+        self.assertEqual(self.obj.admin, None)
+        self.assertEqual(self.obj.status, 'inactive')
