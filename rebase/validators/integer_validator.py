@@ -15,7 +15,7 @@ class IntegerValidator(Validator):
     def properties(self):
         return {
             **super().properties(),
-            'message': '`{value}` is not an integer'
+            'message': lambda: '`{value}` is not an integer'
         }
 
     def validate(self, value):

@@ -19,7 +19,7 @@ class Validator(Object):
         return {
             'errors': [],
             'required': False,
-            'message': f'{{value}} failed to comply with {self.classname} rules.'
+            'message': lambda: f'{{value}} failed to comply with {self.classname} rules.'
         }
 
     def validate(self, value):

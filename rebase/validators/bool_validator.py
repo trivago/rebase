@@ -15,7 +15,7 @@ class BoolValidator(Validator):
     def properties(self):
         return {
             **super().properties(),
-            'message': '`{value}` is not a boolean'
+            'message': lambda: '`{value}` is not a boolean'
         }
 
     def validate(self, value):

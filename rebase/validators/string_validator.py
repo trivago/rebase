@@ -15,7 +15,7 @@ class StringValidator(Validator):
     def properties(self):
         return {
             **super().properties(),
-            'message': '`{value}` is not a valid string'
+            'message': lambda: '`{value}` is not a valid string'
         }
 
     def validate(self, value):

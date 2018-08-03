@@ -16,7 +16,7 @@ class AlnumValidator(Validator):
     def properties(self):
         return {
             **super().properties(),
-            'message': '`{value}` is not a valid alphanumeric string.'
+            'message': lambda: '`{value}` is not a valid alphanumeric string.'
         }
 
     def validate(self, value):

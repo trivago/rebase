@@ -16,9 +16,9 @@ class RangeValidator(Validator):
     def properties(self):
         return {
             **super().properties(),
-            'min': 'min',
-            'max': 'max',
-            'message': '{value} is not within the range {min} and {max}'
+            'min': None,
+            'max': None,
+            'message': lambda: '{value} is not within the range {min} and {max}'
         }
 
     def validate(self, value):
