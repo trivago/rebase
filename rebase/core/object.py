@@ -170,7 +170,7 @@ class Object(object):
 
     def _get_attr_recurse(self, attr, obj, idx=0):
         if isinstance(obj, Object):
-            return self._get_attr_recurse(attr, obj.attributes)
+            return self._get_attr_recurse(attr, obj.attributes, idx)
         elif obj is None:
             return None
 

@@ -28,6 +28,7 @@ class TestObject(unittest.TestCase):
             status='inactive'
         )
 
+
     def test_object_basic(self):
         self.assertIn('name', self.obj.attributes)
         self.assertIn('age', self.obj.attributes)
@@ -52,7 +53,8 @@ class TestObject(unittest.TestCase):
                 'occupation': ('occupation', lambda x: x),
                 'user': ('user', lambda x: x),
                 'admin': 'not admin',
-                'status': lambda: 'active'
+                'status': lambda: 'active',
+                'date_joined': (lambda: 'today', str),
             }
         )
     )
@@ -68,3 +70,10 @@ class TestObject(unittest.TestCase):
         self.assertEqual(self.obj.user, 'user')
         self.assertEqual(self.obj.admin, None)
         self.assertEqual(self.obj.status, 'inactive')
+        self.assertEqual(self.obj.date_joined, 'today')
+
+        self.assertRaises(AttributeError, getattr, self.obj, 'qwerty')
+        self.assertRaises(AttributeError, setattr, self.obj, 'qwerty', 'asd')
+        self.assertIsNone(setattr(self.obj, 'age', 25))
+        self.assertIs(getattr(self.obj, 'age'), 25)
+        self.assertRaises(AttributeError, setattr, self.obj, 'age', '25')
