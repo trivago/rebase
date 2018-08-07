@@ -25,7 +25,8 @@ class TestObject(unittest.TestCase):
             ),
             is_admin=False,
             user='user',
-            status='inactive'
+            status='inactive',
+            mother={'name': 'Lucie', 'age':46}
         )
 
 
@@ -39,7 +40,7 @@ class TestObject(unittest.TestCase):
         self.assertEqual(self.obj.gender, 'Male')
 
         self.assertDictEqual(self.obj.attributes, self.obj.get(
-            'name', 'age', 'gender', 'location', 'is_admin', 'user', 'status'))
+            'name', 'age', 'gender', 'location', 'is_admin', 'user', 'status', 'mother'))
 
     @mock.patch.multiple(
         Object,
@@ -55,6 +56,7 @@ class TestObject(unittest.TestCase):
                 'admin': 'not admin',
                 'status': lambda: 'active',
                 'date_joined': (lambda: 'today', str),
+                'mother': ('mother', Object)
             }
         )
     )
@@ -71,6 +73,7 @@ class TestObject(unittest.TestCase):
         self.assertEqual(self.obj.admin, None)
         self.assertEqual(self.obj.status, 'inactive')
         self.assertEqual(self.obj.date_joined, 'today')
+        self.assertTrue(isinstance(self.obj.mother, Object))
 
         self.assertRaises(AttributeError, getattr, self.obj, 'qwerty')
         self.assertRaises(AttributeError, setattr, self.obj, 'qwerty', 'asd')

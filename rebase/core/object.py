@@ -130,7 +130,9 @@ class Object(object):
     def _enforce_data_type(self, data: Any, data_type: type) -> Any:
         try:
             if data:
-                if data_type in (bool, str, int, float, complex, list, tuple, range, set, dict) or callable(data_type):
+                if data_type is Object:
+                    return data_type(**data)
+                elif data_type in (bool, str, int, float, complex, list, tuple, range, set, dict) or callable(data_type):
                     return data_type(data)
         except TypeError:
             return data
