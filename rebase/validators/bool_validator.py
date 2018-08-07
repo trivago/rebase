@@ -3,7 +3,7 @@
 # Copyright (c) 2018 trivago N.V.
 # License: Apache 2.0
 # Source: https://github.com/trivago/rebase
-# Version: 1.0.3
+# Version: 1.2.0
 # Python Version: 3.6
 # Author: Yuv Joodhisty <yuvrajsingh.joodhisty@trivago.com>
 """
