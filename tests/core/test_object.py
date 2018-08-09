@@ -71,7 +71,7 @@ class TestObject(unittest.TestCase):
         self.assertEqual(self.obj.occupation, None)
         self.assertEqual(self.obj.user, 'user')
         self.assertEqual(self.obj.admin, None)
-        self.assertEqual(self.obj.status, 'inactive')
+        self.assertEqual(self.obj.status, 'active')
         self.assertEqual(self.obj.date_joined, 'today')
         self.assertTrue(isinstance(self.obj.mother, Object))
 
