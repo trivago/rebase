@@ -129,7 +129,7 @@ class Object(object):
 
     def _enforce_data_type(self, data: Any, data_type: type) -> Any:
         try:
-            if data:
+            if data is not None:
                 if isinstance(data_type, type) and isinstance(data_type(), Object):
                     return data_type(**data)
                 elif data_type in (bool, str, int, float, complex, list, tuple, range, set, dict) or callable(data_type):
