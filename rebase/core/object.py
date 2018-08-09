@@ -10,7 +10,7 @@
 
 import uuid
 from typing import Any, Dict, List
-
+import logging
 import simplejson as json
 
 
@@ -130,8 +130,8 @@ class Object(object):
     def _enforce_data_type(self, data: Any, data_type: type) -> Any:
         try:
             if data:
-                if data_type is Object:
-                    return data_type(**data)
+                if isinstance(data_type, type) and isinstance(data_type(), Object):
+                    return data_type(data)
                 elif data_type in (bool, str, int, float, complex, list, tuple, range, set, dict) or callable(data_type):
                     return data_type(data)
         except TypeError:
@@ -147,14 +147,12 @@ class Object(object):
 
         """
         for k, v in self.properties().items():
-            if k in self._raw_attributes and not isinstance(v, tuple):
-                self._attributes.setdefault(k, self._raw_attributes.get(k))
-            elif isinstance(v, str):
+            if isinstance(v, str):
+                logging.debug('Key: %s is being parsed as `str` with value: %s', k, v)
                 self._attributes.setdefault(
                     k, self._get_attr_recurse(v, self._raw_attributes))
-            elif callable(v):
-                self._attributes.setdefault(k, v())
             elif isinstance(v, tuple):
+                logging.debug('Key: %s is being parsed as `tuple` with value: %s', k, v)
                 attribute, data_type = v
                 data = None
                 if attribute and isinstance(attribute, str):
@@ -166,9 +164,18 @@ class Object(object):
                 self._attributes.setdefault(k,
                                             self._enforce_data_type(
                                                 data, data_type))
+            elif isinstance(v, type) and isinstance(v(), Object):
+                logging.debug('Key: %s is being parsed as `rebase.core.Object` with value: %s', k, v)
+                self._attributes.setdefault(k, v(**self._raw_attributes))
+            elif callable(v):
+                logging.debug('Key: %s is being parsed as `callable` with value: %s', k, v)
+                self._attributes.setdefault(k, v())
+            elif k in self._raw_attributes:
+                logging.debug('Key: %s is being parsed as `raw_attributes` with value: %s', k, v)
+                self._attributes.setdefault(k, self._raw_attributes.get(k))
             else:
-                self._attributes.setdefault(
-                    k, self._raw_attributes.get(k, v))
+                logging.debug('Key: %s is being parsed as `raw_attributes` with value: %s', k, v)
+                self._attributes.setdefault(k, self._raw_attributes.get(k, v))
 
     def _get_attr_recurse(self, attr, obj, idx=0):
         if isinstance(obj, Object):
