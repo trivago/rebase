@@ -131,7 +131,7 @@ class Object(object):
         try:
             if data:
                 if isinstance(data_type, type) and isinstance(data_type(), Object):
-                    return data_type(data)
+                    return data_type(**data)
                 elif data_type in (bool, str, int, float, complex, list, tuple, range, set, dict) or callable(data_type):
                     return data_type(data)
         except TypeError:
