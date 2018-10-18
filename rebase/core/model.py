@@ -45,18 +45,24 @@ class Model(Object):
     def scenarios(self) -> Dict[str, List[str]]:
         return {}
 
-    def validate(self) -> bool:
+    def validate(self, attribute = None) -> bool:
         is_valid = True
-        self._errors.clear()
+        if not attribute:
+            self._errors.clear()
+        else:
+            self._errors.update({attribute: []})
 
         for attr, ruleset in self.rules().items():
-            if attr not in self.attributes:
+            if attribute and attr != attribute:
                 continue
             for rule in ruleset:
                 value = getattr(self, attr, None)
-                if rule.required or value is not None:
-                    is_valid &= rule.validate(value)
-                    self.add_errors(attr, rule.errors)
+                if rule.required and value is None:
+                    self.add_errors(attr, [f'`{attr}` is a required field.'])
+                    is_valid = False
+                    continue
+                is_valid &= rule.validate(value)
+                self.add_errors(attr, rule.errors)
 
         return is_valid
 
