@@ -2,9 +2,11 @@ language: python
 python:
 - 3.6
 install:
-- python setup.py install
+  - pip install pipenv
+  - make env
+  - make setup
 script:
-- python setup.py test
+  - make test
 deploy:
   provider: pypi
   user: locustv2

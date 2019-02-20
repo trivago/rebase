@@ -203,7 +203,7 @@ class Object(object):
         Return:
             dict: a dictionary of the attributes of the object
         """
-        return self.get(*self.properties())
+        return self.get(*self._attributes)
 
     @property
     def classname(self) -> str:

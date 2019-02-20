@@ -1,5 +1,11 @@
+env:
+	pipenv --venv || pipenv --python 3.6
+
+activate:
+	pipenv shell
+
 setup:
-	python setup.py install
+	pipenv install -e .
 
 test:
-	python setup.py test
+	pipenv run python setup.py test
