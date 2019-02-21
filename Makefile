@@ -5,7 +5,7 @@ activate:
 	pipenv shell
 
 setup:
-	pipenv install -e .
+	pipenv install -e . --skip-lock --ignore-pipfile -v
 
 test:
 	pipenv run python setup.py test

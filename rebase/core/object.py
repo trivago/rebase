@@ -227,7 +227,7 @@ class Object(object):
 
         """
         return {
-            k: v.get(*v.attributes)
+            k: v.attributes
             if isinstance(v, Object) else [
                 x.attributes
                 if isinstance(x, Object) else x
