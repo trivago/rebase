@@ -2,7 +2,7 @@
 
 
 ## What is it?
-Rebase is a small library consisting of powerful reusable components aimed at making your Data Layer more more robust. With the changes of how data is being stored in databases, it is becoming very challenging to validate data specially in NoSQL databases.
+Rebase is a small library consisting of powerful reusable components aimed at making your Data Layer more robust. With the changes of how data is being stored in databases, it is becoming very challenging to validate data specially in NoSQL databases.
 
 Rebase is designed in such a way that it is easier to manipulate the data and project them in different views.
 
