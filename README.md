@@ -29,3 +29,8 @@ $ pip install rebase
  - [rebase.validators.IntegerValidator](docs/validators/integer_validator.md)
  - [rebase.validators.NestedValidator](docs/validators/nested_validator.md)
  - [rebase.validators.RangeValidator](docs/validators/range_validator.md)
+
+
+## [!CAUTION]
+> This repository has been archived as of October 2025.  
+> If you wish to update or extend this project, please create a fork.
